@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="wechat-enable-text-zoom-em" content="true">
+    <title>罗小姐的用餐清单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 12px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 16px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #3498db;
+            margin: 20px 0 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ecf0f1;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .food-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 12px 0;
+        }
+
+        .food-card {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+            font-size: 0.95em;
+        }
+
+        .avoid-card {
+            border-left-color: #e74c3c;
+        }
+
+        .tips-card {
+            border-left-color: #2ecc71;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-left: 8px;
+            padding-left: 8px;
+        }
+
+        ul ul {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        li {
+            margin: 6px 0;
+            line-height: 1.5;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 0.95em;
+        }
+
+        @media screen and (max-width: 320px) {
+            body {
+                padding: 8px;
+            }
+
+            .container {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            h3 {
+                font-size: 1em;
+            }
+
+            .food-card {
+                padding: 10px;
+            }
+
+            ul {
+                margin-left: 4px;
+                padding-left: 4px;
+            }
+        }
+
+        /* 适配微信浏览器的暗色模式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #f0f0f0;
+            }
+
+            .container {
+                background-color: #2d2d2d;
+            }
+
+            .food-card {
+                background-color: #383838;
+            }
+
+            h1 {
+                color: #ffffff;
+            }
+
+            h2 {
+                color: #3498db;
+                border-bottom-color: #4a4a4a;
+            }
+
+            .warning {
+                background-color: #453a1c;
+                color: #ffd975;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️ 罗小姐的用餐清单</h1>
+
+        <div class="section">
+            <h2>✅ 推荐食用的食物</h2>
+            <div class="food-list">
+                <div class="food-card">
+                    <h3>🍚 温和易消化的主食</h3>
+                    <ul>
+                        <li>熟透的白米饭（软糯可口）</li>
+                        <li>煮软的面条（细面条为佳）</li>
+                        <li>馒头（新鲜蒸制的）</li>
+                        <li>燕麦粥（可加入一点红枣）</li>
+                        <li>白面包（去皮，微烤）</li>
+                        <li>稀饭（可选用大米、小米）</li>
+                        <li>蒸年糕（不油炸）</li>
+                        <li>煮熟的通心粉</li>
+                        <li>蒸饺（皮薄馅温和）</li>
+                    </ul>
+                </div>
+
+                <div class="food-card">
+                    <h3>🥚 优质蛋白</h3>
+                    <ul>
+                        <li>瘦肉（清蒸或水煮）：
+                            <ul>
+                                <li>去皮鸡胸肉</li>
+                                <li>瘦猪里脊</li>
+                                <li>瘦牛肉</li>
+                            </ul>
+                        </li>
+                        <li>鱼类（清蒸）：
+                            <ul>
+                                <li>鲈鱼</li>
+                                <li>鳕鱼</li>
+                                <li>龙利鱼</li>
+                                <li>带鱼（去皮）</li>
+                            </ul>
+                        </li>
+                        <li>豆制品：
+                            <ul>
+                                <li>嫩豆腐</li>
+                                <li>豆腐花</li>
+                                <li>豆浆（不加糖）</li>
+                            </ul>
+                        </li>
+                        <li>蛋类：
+                            <ul>
+                                <li>水煮蛋白</li>
+                                <li>蒸蛋羹（少盐）</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="food-card">
+                    <h3>🥕 温和蔬菜（需要煮熟）</h3>
+                    <ul>
+                        <li>根茎类：
+                            <ul>
+                                <li>胡萝卜（煮软）</li>
+                                <li>山药（蒸煮）</li>
+                                <li>莲藕（煮烂）</li>
+                                <li>土豆泥</li>
+                            </ul>
+                        </li>
+                        <li>瓜类：
+                            <ul>
+                                <li>南瓜（蒸煮）</li>
+                                <li>西葫芦（去皮）</li>
+                                <li>冬瓜</li>
+                                <li>丝瓜</li>
+                            </ul>
+                        </li>
+                        <li>叶菜类：
+                            <ul>
+                                <li>菠菜（焯水）</li>
+                                <li>油菜（煮软）</li>
+                                <li>白菜（炖煮）</li>
+                                <li>芹菜（去筋）</li>
+                            </ul>
+                        </li>
+                        <li>菌菇类：
+                            <ul>
+                                <li>金针菇</li>
+                                <li>蘑菇</li>
+                                <li>杏鲍菇</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="food-card">
+                    <h3>🍎 温和水果</h3>
+                    <ul>
+                        <li>熟透的水果：
+                            <ul>
+                                <li>熟香蕉</li>
+                                <li>蒸熟的苹果</li>
+                                <li>炖梨</li>
+                                <li>蜜瓜（室温）</li>
+                            </ul>
+                        </li>
+                        <li>果泥：
+                            <ul>
+                                <li>苹果泥</li>
+                                <li>梨泥</li>
+                                <li>蒸熟的木瓜泥</li>
+                            </ul>
+                        </li>
+                        <li>水果汁（适量）：
+                            <ul>
+                                <li>苹果汁（无糖）</li>
+                                <li>梨汁（新鲜）</li>
+                                <li>蜜瓜汁</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="food-card">
+                    <h3>🥣 营养补充</h3>
+                    <ul>
+                        <li>温和汤品：
+                            <ul>
+                                <li>白萝卜汤</li>
+                                <li>山药汤</li>
+                                <li>瘦肉汤（去油）</li>
+                                <li>鱼片汤</li>
+                            </ul>
+                        </li>
+                        <li>粥品：
+                            <ul>
+                                <li>皮蛋瘦肉粥（少许）</li>
+                                <li>白粥配咸鸭蛋白</li>
+                                <li>南瓜粥</li>
+                                <li>山药粥</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="food-card">
+                    <h3>🍯 调味品（适量使用）</h3>
+                    <ul>
+                        <li>盐（少量）</li>
+                        <li>白胡椒粉（极少量）</li>
+                        <li>香油（几滴点缀）</li>
+                        <li>葱末（熟制）</li>
+                        <li>蒜末（熟制）</li>
+                        <li>姜末（熟制，少许）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>❌ 需要避免的食物</h2>
+            <div class="food-list">
+                <div class="food-card avoid-card">
+                    <h3>🌶️ 刺激性食物</h3>
+                    <ul>
+                        <li>辛辣食物（辣椒、胡椒、咖喱等）</li>
+                        <li>酸性食物（柠檬、醋、酸梅等）</li>
+                        <li>咖啡（含咖啡因饮品）</li>
+                        <li>浓茶（红茶、绿茶等）</li>
+                        <li>酒精饮品（啤酒、白酒、红酒等）</li>
+                        <li>芥末、辣根等调味品</li>
+                        <li>浓汤、重口味调味料</li>
+                    </ul>
+                </div>
+
+                <div class="food-card avoid-card">
+                    <h3>🍖 油腻食物</h3>
+                    <ul>
+                        <li>油炸食品（炸鸡、薯条、炸串等）</li>
+                        <li>肥肉（五花肉、带皮鸡肉等）</li>
+                        <li>动物内脏（肝、肠、肚等）</li>
+                        <li>奶油制品（奶油蛋糕、冰淇淋等）</li>
+                        <li>油炒食品（特别是大火快炒）</li>
+                        <li>烧烤类食物</li>
+                        <li>含反式脂肪的零食（薯片、饼干等）</li>
+                    </ul>
+                </div>
+
+                <div class="food-card avoid-card">
+                    <h3>🥤 饮品和甜食</h3>
+                    <ul>
+                        <li>碳酸饮料（可乐、雪碧等）</li>
+                        <li>含气泡的矿泉水</li>
+                        <li>巧克力（特别是黑巧克力）</li>
+                        <li>浓缩果汁</li>
+                        <li>含糖饮料</li>
+                        <li>冰冷饮品</li>
+                        <li>含咖啡因的能量饮料</li>
+                    </ul>
+                </div>
+
+                <div class="food-card avoid-card">
+                    <h3>🍊 水果和蔬菜</h3>
+                    <ul>
+                        <li>柑橘类水果（橙子、柚子、柠檬等）</li>
+                        <li>番茄（生食和熟食都要避免）</li>
+                        <li>洋葱（包括葱花）</li>
+                        <li>大蒜（包括蒜末）</li>
+                        <li>辣椒（包括甜椒）</li>
+                        <li>生姜（特别是生食）</li>
+                        <li>未熟的水果</li>
+                        <li>酸性水果（菠萝、草莓等）</li>
+                    </ul>
+                </div>
+
+                <div class="food-card avoid-card">
+                    <h3>🥫 加工食品</h3>
+                    <ul>
+                        <li>方便面和速食品</li>
+                        <li>罐头食品（特别是酸性的）</li>
+                        <li>腌制食品（咸菜、泡菜等）</li>
+                        <li>烟熏食品</li>
+                        <li>含防腐剂的加工食品</li>
+                        <li>酱料（番茄酱、辣酱等）</li>
+                        <li>咸味零食</li>
+                    </ul>
+                </div>
+
+                <div class="food-card avoid-card">
+                    <h3>⚠️ 其他注意事项</h3>
+                    <ul>
+                        <li>过热的食物（等温度降至温热再食用）</li>
+                        <li>过冷的食物（特别是冰箱直接取出的）</li>
+                        <li>过硬的食物（可能刺激胃部）</li>
+                        <li>过于粗糙的食物（全麦面包等）</li>
+                        <li>含咖啡因的药物</li>
+                        <li>含薄荷的食品（薄荷糖、口香糖等）</li>
+                        <li>过期或变质的食物</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔑 饮食建议</h2>
+            <div class="food-list">
+                <div class="food-card tips-card">
+                    <h3>⏰ 进餐原则</h3>
+                    <ul>
+                        <li>少量多餐，每天吃4-6顿</li>
+                        <li>细嚼慢咽</li>
+                        <li>食物温度要适中</li>
+                        <li>定时定量</li>
+                    </ul>
+                </div>
+
+                <div class="food-card tips-card">
+                    <h3>👨‍🍳 烹饪方式</h3>
+                    <ul>
+                        <li>以清蒸、水煮为主</li>
+                        <li>避免煎炸</li>
+                        <li>少油少盐</li>
+                        <li>食物要煮熟煮软</li>
+                    </ul>
+                </div>
+
+                <div class="food-card tips-card">
+                    <h3>🕒 用餐时间</h3>
+                    <ul>
+                        <li>保持规律的进餐时间</li>
+                        <li>晚餐至少在睡前3小时完成</li>
+                        <li>不要空腹太久</li>
+                    </ul>
+                </div>
+
+                <div class="food-card tips-card">
+                    <h3>💧 饮水建议</h3>
+                    <ul>
+                        <li>餐间喝水，不要餐中大量饮水</li>
+                        <li>每天保持充足的水分摄入</li>
+                        <li>温开水为主</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning">
+            <h3>⚠️ 特别提醒：</h3>
+            <ul>
+                <li>以上建议仅供参考，具体饮食方案建议遵医嘱</li>
+                <li>记录饮食日记，观察哪些食物会加重症状</li>
+                <li>保持良好的生活作息，避免熬夜</li>
+                <li>适当运动，但避免剧烈运动</li>
+                <li>如症状加重要及时就医</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 
